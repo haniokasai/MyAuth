@@ -155,8 +155,11 @@ public class mysql implements Listener{
 		      }
 		      pstmt.close();
 		      rs.close();
+		      if(r == null){
+		    	  return false;
+		      }
 		      if(r.equals(name)){
-		    	  pstmt = conn.prepareStatement("DELETE * FROM player WHERE name = ?");
+		    	  pstmt = conn.prepareStatement("DELETE  FROM player WHERE name = ?");
 		    	  pstmt.setString(1, name);
 		    	  pstmt.executeUpdate();
 		    	  rs.close();
