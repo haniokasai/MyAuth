@@ -9,15 +9,9 @@ commands:
  register:
   description: register your account
   usage: /register <password>
-  permission: MyAuth.register
-  default: true
  login:
   description: Login to your account
   usage: /login <password>
-  permission: MyAuth.login
-  default: true
  unregister:
   description: Reset Passwd(only from console)
   usage: /unregister <playername>
-  permission: MyAuth.unregister
-  default: op
