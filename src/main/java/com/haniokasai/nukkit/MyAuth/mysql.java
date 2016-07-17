@@ -179,10 +179,9 @@ public class mysql implements Listener{
 		String p = null;
 		try {
 			stmt = conn.createStatement();
-			 String sql;
+			String sql;
 		      sql = "SELECT passwd FROM player WHERE name = '"+name+"'";
 		      ResultSet rs = stmt.executeQuery(sql);
-
 		      while(rs.next()){
 		         p = rs.getString("passwd");
 		      }
@@ -193,7 +192,9 @@ public class mysql implements Listener{
 		} catch (SQLException e1) {
 			e1.printStackTrace();
 		}
-
+		if(p == null){
+		return false;	
+		}
 		if(p.equals(hashed)){
 	    	  return true;
 	      }else{
