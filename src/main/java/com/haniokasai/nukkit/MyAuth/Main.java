@@ -80,6 +80,7 @@ config.get("ip");
 				}else{
 			        Date date = new Date(((long)Integer.parseInt(map.get("llogin")) * 1000));
 			        player.sendMessage(TextFormat.RED +"[MyAuth] last login:"+date);
+			        ctime = (int) (System.currentTimeMillis()/1000);
 			        mysql.settime(name,ctime);
 					if (map.get("ip").equals(ip) & map.get("cid").equals(cid)) {
 						player.sendMessage("[MyAuth]Logined!");
