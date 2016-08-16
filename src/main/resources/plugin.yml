@@ -15,3 +15,6 @@ commands:
  unregister:
   description: Reset Passwd(only from console)
   usage: /unregister <playername>
+ changepasswd:
+  description: Change Passwd
+  usage: /changepasswd <old passwd> <new passwd> <new passwd>

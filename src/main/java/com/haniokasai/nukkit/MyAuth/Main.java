@@ -14,6 +14,7 @@ import cn.nukkit.Player;
 import cn.nukkit.Server;
 import cn.nukkit.command.Command;
 import cn.nukkit.command.CommandSender;
+import cn.nukkit.command.ConsoleCommandSender;
 import cn.nukkit.event.EventHandler;
 import cn.nukkit.event.Listener;
 import cn.nukkit.event.player.PlayerJoinEvent;
@@ -106,7 +107,7 @@ config.get("ip");
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
      	switch (command.getName()) {
      	case "unregister":
-             if (!(sender instanceof Player)) {
+             if (sender instanceof ConsoleCommandSender) {
          		if(args.length != 1){
          			sender.sendMessage("[MyAuth]/unregister <playername>");
          			break;
@@ -123,6 +124,25 @@ config.get("ip");
              }
 
      	break;
+     	case "changepasswd":
+     		if(args.length != 3){
+     			sender.sendMessage("[MyAuth]/changepasswd <old passwd> <new passwd> <new passwd>");
+     			break;
+     		}
+     		if(!args[1].equals(args[2])){
+     			sender.sendMessage("[MyAuth]Please enter correct new-passwd.");
+     			break;
+     		}
+     		String name = sender.getName();
+
+			if(mysql.login(name,toEn(args[0]))){
+				mysql.remove(name);
+				mysql.regi((Player)sender, toEn(args[2]));
+        		sender.sendMessage("[MyAuth]Everything Ok, Your Now Passwd is : "+args[1]);
+			}else{
+				sender.sendMessage("[MyAuth]Please enter correct old-passwd.");
+			}
+     		break;
      	}
      	Player player;
      	String name;
