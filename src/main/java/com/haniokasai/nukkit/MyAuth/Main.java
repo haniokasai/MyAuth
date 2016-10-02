@@ -71,7 +71,7 @@ config.get("ip");
 	@EventHandler
 	public void join(PlayerJoinEvent event){
 				Player player = event.getPlayer();
-				String name = player.getName();
+				String name = player.getName().toLowerCase();
 				String ip = player.getAddress();
 				String cid = player.getUniqueId().toString();
 				HashMap<String,String> map = mysql.get(name);
@@ -96,7 +96,7 @@ config.get("ip");
 	@EventHandler
 	public void quit(PlayerQuitEvent event){
 		Player player = event.getPlayer();
-		String name = player.getName();
+		String name = player.getName().toLowerCase();
 		ct.remove(name);
 		lged.remove(name);
 		prerg.remove(name);
