@@ -83,7 +83,7 @@ config.get("ip");
 			        player.sendMessage(TextFormat.RED +"[MyAuth] last login:"+date);
 			        ctime = (int) (System.currentTimeMillis()/1000);
 			        mysql.settime(name,ctime);
-					if (map.get("ip").equals(ip) & map.get("cid").equals(cid)) {
+					if (map.get("ip").equals(ip) & map.get("uuid").equals(cid)) {
 						player.sendMessage("[MyAuth]Logined!");
 						lged.put(name,true);
 
