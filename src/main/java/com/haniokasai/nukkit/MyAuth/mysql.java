@@ -33,7 +33,7 @@ public class mysql implements Listener{
 			 conn =DriverManager.getConnection("jdbc:mysql://"+config.getString("ip")+":"+config.getString("port")+"/"+config.getString("dbname")+"?useUnicode=true&characterEncoding=UTF-8&useSSL=false&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC",config.getString("user"),config.getString("passwd"));
 			 Statement stmt = conn.createStatement();
 			 stmt.setQueryTimeout(10);
-			 stmt.executeUpdate("CREATE TABLE IF NOT EXISTS player (name  VARCHAR(25) PRIMARY KEY , passwd TEXT, ip TEXT, cid TEXT, flogin TEXT, llogin TEXT)");
+			 stmt.executeUpdate("CREATE TABLE IF NOT EXISTS player (name  VARCHAR(25) PRIMARY KEY , passwd TEXT, ip TEXT, uuid TEXT, flogin TEXT, llogin TEXT)");
 			 stmt.close();
 			 Server.getInstance().getLogger().info("[MyAuth]Loaded");
 			 Server.getInstance().getScheduler().scheduleRepeatingTask(new Runnable() {
@@ -80,7 +80,7 @@ public class mysql implements Listener{
 		         map.put("name", rs.getString("name"));
 		         map.put("passwd", rs.getString("passwd"));
 		         map.put("ip", rs.getString("ip"));
-		         map.put("cid", rs.getString("cid"));
+		         map.put("uuid", rs.getString("uuid"));
 		         map.put("flogin", rs.getString("flogin"));
 		         map.put("llogin", rs.getString("llogin"));
 		      }
@@ -108,10 +108,10 @@ public class mysql implements Listener{
 
 	}
 
-	public static boolean setcid(String name,String cid,String ip) {
+	public static boolean setuuid(String name,String uuid,String ip) {
 		try {
 			Statement stmt = conn.createStatement();
-		      stmt.executeUpdate("UPDATE player SET  cid = '"+cid+"' ,ip = '"+ip+"'   WHERE name = '"+name+"'");
+		      stmt.executeUpdate("UPDATE player SET  uuid = '"+uuid+"' ,ip = '"+ip+"'   WHERE name = '"+name+"'");
 		      stmt.close();
 		      return true;
 		} catch (SQLException e) {
@@ -132,7 +132,7 @@ public class mysql implements Listener{
 		         r = rs.getString("name");
 		      }
 		      if(r == null){
-		    	  stmt.executeUpdate("INSERT INTO player (name,passwd,ip,cid,flogin,llogin) VALUES ('"+player.getName()+"','"+hashed+"','"+player.getAddress()+"','"+ player.getUniqueId().toString()+"','"+Main.ctime+"','"+Main.ctime+"');");
+		    	  stmt.executeUpdate("INSERT INTO player (name,passwd,ip,uuid,flogin,llogin) VALUES ('"+player.getName()+"','"+hashed+"','"+player.getAddress()+"','"+ player.getUniqueId().toString()+"','"+Main.ctime+"','"+Main.ctime+"');");
 		      }
 		      rs.close();
 

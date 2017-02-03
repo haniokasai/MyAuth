@@ -192,7 +192,7 @@ config.get("ip");
         			if(mysql.login(name,hashed)){
                 		lged.put(name,true);
                 		prerg.remove(name);
-						mysql.setcid(name, cid,ip);
+						mysql.setuuid(name, cid,ip);
                 		player.sendMessage("[MyAuth]Logined!");
 
         			}else{

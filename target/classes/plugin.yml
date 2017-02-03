@@ -1,0 +1,20 @@
+name: MyAuth
+main: com.haniokasai.nukkit.MyAuth.Main
+version: 1.0.0
+api: [1.0.0]
+load: POSTWORLD
+author: haniokasai
+description: Nukkit auth plugin (support ClientID)
+commands:
+ register:
+  description: register your account
+  usage: /register <password>
+ login:
+  description: Login to your account
+  usage: /login <password>
+ unregister:
+  description: Reset Passwd(only from console)
+  usage: /unregister <playername>
+ changepasswd:
+  description: Change Passwd
+  usage: /changepasswd <old passwd> <new passwd> <new passwd>
